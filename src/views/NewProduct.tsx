@@ -1,9 +1,9 @@
-import { Link, Form, useActionData } from 'react-router-dom'
+import { Link, Form, useActionData, ActionFunctionArgs } from 'react-router-dom'
+import ErrorMessage from '../components/ErrorMessage'
 
-export async function action({request}) {
+export async function action({request} : ActionFunctionArgs) {
 
     const data = Object.fromEntries(await request.formData())
-    
     let error = ''
     if(Object.values(data).includes('')) {
         error = 'Todos los campos son obligatorios'
@@ -12,16 +12,11 @@ export async function action({request}) {
         return error
     }
     
-
-
     return {}
 }
 
 export default function NewProduct() {
-
-    const error = useActionData() || ''
-
-    console.log(error)
+    const error = useActionData() as string
 
     return (
         <>
@@ -34,6 +29,8 @@ export default function NewProduct() {
                     Volver a Productos
                 </Link>
             </div>
+
+            {error && <ErrorMessage>{error}</ErrorMessage>}
 
             <Form
                 className="mt-10"  
