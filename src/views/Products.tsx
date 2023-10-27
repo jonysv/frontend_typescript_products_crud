@@ -1,4 +1,13 @@
 import { Link } from 'react-router-dom'
+import { getProducts } from '../services/ProductService'
+import { Product } from '../types'
+
+export async function loader() {
+  const products = await getProducts()
+  console.log(products)
+
+  return {}
+}
 
 export default function Products() {
   return (
