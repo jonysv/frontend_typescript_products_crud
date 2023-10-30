@@ -1,4 +1,7 @@
-import { object, string, number, boolean, Output, array } from 'valibot'
+import { object, string, number, boolean, Output, array, coerce } from 'valibot'
+
+export const NumberSchema = coerce(number(), Number)
+export const AvailabilitySchema = coerce(boolean(), Boolean)
 
 export const DraftProductSchema = object({
     name: string(),
